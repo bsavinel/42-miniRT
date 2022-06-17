@@ -6,7 +6,7 @@
 /*   By: bsavinel <bsavinel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/13 15:46:37 by plouvel           #+#    #+#             */
-/*   Updated: 2022/06/17 14:13:51 by bsavinel         ###   ########.fr       */
+/*   Updated: 2022/06/17 16:46:50 by bsavinel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,9 +109,32 @@ typedef struct e_plan
 typedef struct e_disk
 {
 	t_3dpoint	center;
-	t_3dpoint	rayon;
+	double		rayon;
 	t_vec3d		normal;
 }				t_disk;
+
+typedef struct e_cylindre
+{
+	t_3dpoint	center;
+	t_vec3d		orientation;
+	double		rayon;  // le parsing donne le diametre mais il me faut le rayon
+	double		hauteur;
+}				t_cylindre;
+
+/*
+ *	cylinder intersec struct
+ */
+
+typedef struct e_cylindre_utils
+{
+	bool		up_disk;
+	t_rayhit	rayhit_up_disk;
+	bool		down_disk;
+	t_rayhit	rayhit_down_disk;
+	bool		cylindre;
+	t_rayhit	rayhit_cylindre;
+}				t_cylindre_utils;
+
 
 typedef struct e_object	t_object;
 
@@ -124,6 +147,7 @@ struct e_object
 		t_sphere	sphere;
 		t_plan		plan;
 		t_disk		disk;
+		t_cylindre	cylindre;
 	} p;
 	t_albedo			albedo;
 	t_rayhit			rayhit;
