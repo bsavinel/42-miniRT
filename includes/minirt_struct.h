@@ -6,7 +6,7 @@
 /*   By: bsavinel <bsavinel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/13 15:46:37 by plouvel           #+#    #+#             */
-/*   Updated: 2022/06/15 18:26:11 by plouvel          ###   ########.fr       */
+/*   Updated: 2022/06/16 16:55:26 by bsavinel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,13 @@ typedef struct e_plan
 	t_vec3d		normal;
 }				t_plan;
 
+typedef struct e_disk
+{
+	t_3dpoint	center;
+	t_3dpoint	rayon;
+	t_vec3d		normal;
+}				t_disk;
+
 typedef struct e_object	t_object;
 
 typedef bool (*t_intersect_fnct)(t_object *, t_ray *, t_rayhit *);
@@ -94,7 +101,9 @@ struct e_object
 	{
 		t_sphere	sphere;
 		t_plan		plan;
+		t_disk		disk;
 	} p;
+	
 	t_intersect_fnct	fnct;
 };
 
