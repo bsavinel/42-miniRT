@@ -1,30 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ray_intersection.h                                 :+:      :+:    :+:   */
+/*   math_utils.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bsavinel <bsavinel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: plouvel <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/06/15 17:23:08 by plouvel           #+#    #+#             */
-/*   Updated: 2022/06/16 17:03:22 by plouvel          ###   ########.fr       */
+/*   Created: 2022/06/16 15:44:52 by plouvel           #+#    #+#             */
+/*   Updated: 2022/06/16 15:45:25 by plouvel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef RAY_INTERSECTION_H
-# define RAY_INTERSECTION_H
+#ifndef MATH_UTILS_H
+# define MATH_UTILS_H
 
-# include "minirt_struct.h"
-
-/*
- *	intersect_sphere.c
- */
-
-bool	intersect_sphere(t_object *obj, t_ray *ray);
-
-/*
- *	intersect_plane.c
- */
-
-bool	plane_intersection(t_object *object, t_ray *ray);
+double	min(double a, double b);
+double	max(double a, double b);
 
 #endif

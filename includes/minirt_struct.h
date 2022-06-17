@@ -6,7 +6,7 @@
 /*   By: bsavinel <bsavinel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/13 15:46:37 by plouvel           #+#    #+#             */
-/*   Updated: 2022/06/16 16:55:26 by bsavinel         ###   ########.fr       */
+/*   Updated: 2022/06/17 14:13:51 by bsavinel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,11 @@
 
 /* Enum */
 
+typedef enum e_object_type
+{
+	T_SPHERE,
+	T_PLAN
+}			t_object_type;
 
 /* Math related structure */
 
@@ -31,6 +36,8 @@ typedef struct e_vec
 typedef t_vec	t_vec3d;
 typedef t_vec	t_3dpoint;
 typedef t_vec	t_2dpoint;
+typedef t_vec	t_albedo;
+typedef t_vec	t_color;
 
 /* minilibx and program structure */
 
@@ -50,9 +57,23 @@ typedef struct s_mlx
 	void		*win;
 }	t_mlx;
 
+typedef struct e_light
+{
+	t_3dpoint	point;
+	double		ratio;
+}	t_light;
+
+
+typedef struct e_scene
+{
+	t_list	*objs;
+	t_light	light;
+}				t_scene;
+
 typedef struct s_minirt
 {
 	t_mlx	mlx;
+	t_scene	scene;
 }	t_minirt;
 
 /* Related ray structure */
@@ -68,6 +89,7 @@ typedef struct s_rayhit
 	double		t;
 	t_3dpoint	intersect_p;
 	t_vec3d		normal;
+	uint32_t	pixel_color;
 }	t_rayhit;
 
 /* Primitive geometry structure */
@@ -93,7 +115,7 @@ typedef struct e_disk
 
 typedef struct e_object	t_object;
 
-typedef bool (*t_intersect_fnct)(t_object *, t_ray *, t_rayhit *);
+typedef bool (*t_intersect_fnct)(t_object *, t_ray *);
 
 struct e_object
 {
@@ -103,13 +125,10 @@ struct e_object
 		t_plan		plan;
 		t_disk		disk;
 	} p;
-	
+	t_albedo			albedo;
+	t_rayhit			rayhit;
+	t_object_type		type;
 	t_intersect_fnct	fnct;
 };
-
-typedef struct e_scene
-{
-	t_list	*objs;
-}				t_scene;
 
 #endif
