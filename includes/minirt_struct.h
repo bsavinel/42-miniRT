@@ -6,7 +6,7 @@
 /*   By: bsavinel <bsavinel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/13 15:46:37 by plouvel           #+#    #+#             */
-/*   Updated: 2022/06/17 16:46:50 by bsavinel         ###   ########.fr       */
+/*   Updated: 2022/06/18 17:33:46 by bsavinel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,8 +131,10 @@ typedef struct e_cylindre_utils
 	t_rayhit	rayhit_up_disk;
 	bool		down_disk;
 	t_rayhit	rayhit_down_disk;
-	bool		cylindre;
-	t_rayhit	rayhit_cylindre;
+	bool		cylindre_first;
+	t_rayhit	rayhit_cylindre_first;
+	bool		cylindre_second;
+	t_rayhit	rayhit_cylindre_second;
 }				t_cylindre_utils;
 
 
