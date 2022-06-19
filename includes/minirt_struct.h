@@ -6,7 +6,7 @@
 /*   By: bsavinel <bsavinel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/13 15:46:37 by plouvel           #+#    #+#             */
-/*   Updated: 2022/06/18 17:33:46 by bsavinel         ###   ########.fr       */
+/*   Updated: 2022/06/19 12:20:08 by bsavinel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,7 +117,7 @@ typedef struct e_cylindre
 {
 	t_3dpoint	center;
 	t_vec3d		orientation;
-	double		rayon;  // le parsing donne le diametre mais il me faut le rayon
+	double		rayon;  //* le parsing donne le diametre mais il me faut le rayon
 	double		hauteur;
 }				t_cylindre;
 
