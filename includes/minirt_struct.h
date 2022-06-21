@@ -6,7 +6,7 @@
 /*   By: bsavinel <bsavinel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/13 15:46:37 by plouvel           #+#    #+#             */
-/*   Updated: 2022/06/19 12:20:08 by bsavinel         ###   ########.fr       */
+/*   Updated: 2022/06/21 17:21:44 by bsavinel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,8 @@
 typedef enum e_object_type
 {
 	T_SPHERE,
-	T_PLAN
+	T_PLAN,
+	T_CYLINDRE
 }			t_object_type;
 
 /* Math related structure */
@@ -135,6 +136,8 @@ typedef struct e_cylindre_utils
 	t_rayhit	rayhit_cylindre_first;
 	bool		cylindre_second;
 	t_rayhit	rayhit_cylindre_second;
+	double		yangle;
+	double		zangle;
 }				t_cylindre_utils;
 
 

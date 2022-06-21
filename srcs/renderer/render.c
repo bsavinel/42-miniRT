@@ -6,7 +6,7 @@
 /*   By: bsavinel <bsavinel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/14 14:52:40 by plouvel           #+#    #+#             */
-/*   Updated: 2022/06/16 17:38:03 by plouvel          ###   ########.fr       */
+/*   Updated: 2022/06/21 17:41:53 by bsavinel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,9 +61,11 @@ void	render_img(t_minirt *minirt)
 
 	/* Ici on definie tout nos objects pour debug. */
 
-	add_obj_to_scene(&minirt->scene, new_sphere(
+	/*add_obj_to_scene(&minirt->scene, new_sphere(
 				vec(0, 0, -55),
 				8.0,
+				0xff0000));*/
+	add_obj_to_scene(&minirt->scene, new_cylindre(vec(0, 0, -55), vec_normalize(vec(0.5, 0, -0.5)), 8.0, 10.0,
 				0xff0000));
 
 	// le sol
