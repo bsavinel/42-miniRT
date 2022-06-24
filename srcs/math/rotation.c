@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   rotaion.c                                          :+:      :+:    :+:   */
+/*   rotation.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bsavinel <bsavinel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 17:35:50 by bsavinel          #+#    #+#             */
-/*   Updated: 2022/06/20 17:38:48 by bsavinel         ###   ########.fr       */
+/*   Updated: 2022/06/23 10:01:20 by bsavinel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@ void	rotate_z(t_vec *point, double rotation)
 
 	xtmp = point->x;
 	ytmp = point->y;
-	point->x = xtmp * cos(rotation) - ytmp * sin(rotation)+ 0.5;
-	point->y = xtmp * sin(rotation) + ytmp * cos(rotation)+ 0.5;
+	point->x = xtmp * cos(rotation) - ytmp * sin(rotation);
+	point->y = xtmp * sin(rotation) + ytmp * cos(rotation);
 }
 
 void	rotate_y(t_vec *point, double rotation)
@@ -31,8 +31,8 @@ void	rotate_y(t_vec *point, double rotation)
 
 	xtmp = point->x;
 	ztmp = point->z;
-	point->x = xtmp * cos(rotation) + ztmp * sin(rotation)+ 0.5;
-	point->z = -xtmp * sin(rotation) + ztmp * cos(rotation)+ 0.5;
+	point->x = xtmp * cos(rotation) + ztmp * sin(rotation);
+	point->z = -xtmp * sin(rotation) + ztmp * cos(rotation);
 }
 
 void	rotate_x(t_vec *point, double rotation)
@@ -42,6 +42,6 @@ void	rotate_x(t_vec *point, double rotation)
 
 	ytmp = point->y;
 	ztmp = point->z;
-	point->y = ytmp * cos(rotation) - ztmp * sin(rotation) + 0.5;
-	point->z = ytmp * sin(rotation) + ztmp * cos(rotation) + 0.5;
+	point->y = ytmp * cos(rotation) - ztmp * sin(rotation);
+	point->z = ytmp * sin(rotation) + ztmp * cos(rotation);
 }

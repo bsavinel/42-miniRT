@@ -6,7 +6,7 @@
 /*   By: bsavinel <bsavinel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/13 15:46:37 by plouvel           #+#    #+#             */
-/*   Updated: 2022/06/21 17:21:44 by bsavinel         ###   ########.fr       */
+/*   Updated: 2022/06/24 17:40:09 by bsavinel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,6 +122,15 @@ typedef struct e_cylindre
 	double		hauteur;
 }				t_cylindre;
 
+typedef struct e_cone
+{
+	t_3dpoint	top;
+	double		hauteur;
+	t_vec3d		direction;
+	double		angle;
+}				t_cone;
+
+
 /*
  *	cylinder intersec struct
  */
@@ -138,6 +147,7 @@ typedef struct e_cylindre_utils
 	t_rayhit	rayhit_cylindre_second;
 	double		yangle;
 	double		zangle;
+	t_ray		fake_ray;
 }				t_cylindre_utils;
 
 
@@ -153,6 +163,7 @@ struct e_object
 		t_plan		plan;
 		t_disk		disk;
 		t_cylindre	cylindre;
+		t_cone		cone;
 	} p;
 	t_albedo			albedo;
 	t_rayhit			rayhit;

@@ -6,7 +6,7 @@
 /*   By: bsavinel <bsavinel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 17:58:59 by bsavinel          #+#    #+#             */
-/*   Updated: 2022/06/21 17:10:06 by bsavinel         ###   ########.fr       */
+/*   Updated: 2022/06/24 14:31:56 by bsavinel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -260,30 +260,34 @@ void	rotate_x(t_vec *point, double rotation)
 
 void	normalize_cylinder(t_vec ob)
 {
-	//printf("start ob \nx :%lf, y: %lf z:%lf\n", ob.x, ob.y, ob.z);
+	t_vec tmp;
+	
+	printf("ob \nx :%lf, y: %lf z:%lf\n", ob.x, ob.y, ob.z);
 	double xzlenght = sqrt(ob.x * ob.x + ob.z * ob.z);
 	double yangle = acos(ob.x / xzlenght);  // met x a 0
 	
 	double vecLength = sqrt(ob.x * ob.x + ob.y * ob.y + ob.z * ob.z);
 	double zangle = acos(xzlenght / vecLength);
-		
-	//rotate_y(&ob, yangle);
-	//rotate_z(&ob, zangle);
-	
-	if (ob.z > 0)
-		rotate_y(&ob, yangle);
-	else
-		rotate_y(&ob, yangle * -1.0);
-	if (ob.y < 0)
-		rotate_z(&ob, zangle);
-	else
-		rotate_z(&ob, zangle * -1.0);
-
-
-
-	
+	if (ob.z < 0)
+		yangle =  yangle * -1.0;
+	if (ob.y > 0)
+		zangle = zangle * -1.0;
+	rotate_y(&ob, yangle);
+	rotate_z(&ob, zangle);
 	ob = vec_normalize(ob);
 	printf("ob \nx :%lf, y: %lf z:%lf\n", ob.x, ob.y, ob.z);
+	//printf("yangle %lf zangle %lf\n",yangle, zangle);
+	tmp = ob;
+	zangle = zangle * -1.0;
+	yangle = yangle * -1.0;
+	rotate_z(&ob, zangle);
+	rotate_y(&ob, yangle);
+	//rotate_y(&tmp, yangle);
+	//rotate_z(&tmp, zangle);
+	ob = vec_normalize(ob);
+	//tmp = vec_normalize(tmp);
+	//printf("ob\nx :%lf, y: %lf z:%lf\n", ob.x, ob.y, ob.z);
+	//printf("tmp\nx :%lf, y: %lf z:%lf\n", tmp.x, tmp.y, tmp.z);
 }
 
 
@@ -324,4 +328,48 @@ int main()
 	normalize_cylinder(vec_normalize(vec(0, 1, -0.5)));
 	normalize_cylinder(vec_normalize(vec(-0.7, 0, 1)));
 	normalize_cylinder(vec_normalize(vec(-0.7, 1, 0)));
+	normalize_cylinder(vec_normalize(vec(0, 1, 0)));
+	normalize_cylinder(vec_normalize(vec(1, 0, 0)));
+	normalize_cylinder(vec_normalize(vec(0, 0, 1)));
+	normalize_cylinder(vec_normalize(vec_normalize(vec(0.2, 0.7, 0.5))));
 }
+
+/*bool	check_individual_point(t_rayhit *rayhit, t_object *obj)
+{
+	t_object	tmp;
+	t_ray		fake_ray;
+	int			signe;
+
+	signe = 0;
+	fake_ray.org = rayhit->intersect_p;
+	fake_ray.dir = vec_add(obj->p.cylindre.orientation, vec(0.01, 0.01, 0.01));
+	tmp.p.plan.point = vec_add(obj->p.cylindre.center, vec_mul_scalar(obj->p.cylindre.orientation, obj->p.cylindre.hauteur / 2.0));
+	tmp.p.plan.normal = obj->p.cylindre.orientation;
+	plane_intersection(&tmp, &fake_ray);
+	if (tmp.rayhit.t == 0)
+		return (true);
+	else if (tmp.rayhit.t > 0)
+		signe++;
+	else
+		signe--;
+	tmp.p.plan.point = vec_sub(obj->p.cylindre.center, vec_mul_scalar(obj->p.cylindre.orientation, obj->p.cylindre.hauteur / 2.0));
+	if (tmp.rayhit.t == 0 || (signe == 1 && tmp.rayhit.t < 0) || (signe == -1 && tmp.rayhit.t > 0))
+	{
+		fprintf(stderr, "True point\n");
+		return (true);
+	}
+	else
+		return (false);
+}*/
+
+/*bool	check_individual_point(t_rayhit *rayhit, t_object *obj)
+{
+	double	lenght;
+	double	hauteur;
+
+	lenght = vec_length(vec_sub(obj->p.cylindre.center, rayhit->intersect_p));
+	hauteur = sqrt(-1.0 * (obj->p.cylindre.rayon * obj->p.cylindre.rayon) + (lenght * lenght));
+	if (hauteur > obj->p.cylindre.hauteur / 2.0)
+		return (false);
+	return (true);
+}*/

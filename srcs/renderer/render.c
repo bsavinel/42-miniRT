@@ -6,7 +6,7 @@
 /*   By: bsavinel <bsavinel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/14 14:52:40 by plouvel           #+#    #+#             */
-/*   Updated: 2022/06/21 17:41:53 by bsavinel         ###   ########.fr       */
+/*   Updated: 2022/06/24 14:59:36 by bsavinel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,8 +65,13 @@ void	render_img(t_minirt *minirt)
 				vec(0, 0, -55),
 				8.0,
 				0xff0000));*/
-	add_obj_to_scene(&minirt->scene, new_cylindre(vec(0, 0, -55), vec_normalize(vec(0.5, 0, -0.5)), 8.0, 10.0,
+	add_obj_to_scene(&minirt->scene, new_cylindre(vec(0.0, 20.0, -55.0), vec_normalize(vec()), 8.0, 10.0,
 				0xff0000));
+
+	/*add_obj_to_scene(&minirt->scene, new_sphere(
+				vec(0, 20, -55),
+				8.0,
+				0xFF00FF00));*/
 
 	// le sol
 
@@ -78,7 +83,7 @@ void	render_img(t_minirt *minirt)
 	/* Pour l'instant, l'unique lumiere */
 
 	set_scene_light(&minirt->scene,
-				vec(0, 57, -70),
+				vec(0, 55, -70),
 				1);
 
 

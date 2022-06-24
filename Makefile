@@ -6,7 +6,7 @@
 #    By: bsavinel <bsavinel@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/04 13:33:13 by bsavinel          #+#    #+#              #
-#    Updated: 2022/06/21 17:29:30 by bsavinel         ###   ########.fr        #
+#    Updated: 2022/06/23 14:13:23 by bsavinel         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,7 @@
 NAME = miniRT
 
 CC = cc 
-CFLAGS = -Wall -Wextra -Werror -g3 -fsanitize=address -O2
+CFLAGS = -Wall -Wextra -Werror -g3 -fsanitize=address -O3
 
 
 ARGUMENT_RUN = 
@@ -138,3 +138,5 @@ minilibx/libmlx_Linux.a:
 -include $(DEPS)
 
 .PHONY: all clean fclean re bonus
+
+.SILENT:
