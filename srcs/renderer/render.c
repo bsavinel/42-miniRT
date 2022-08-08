@@ -6,7 +6,7 @@
 /*   By: bsavinel <bsavinel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/14 14:52:40 by plouvel           #+#    #+#             */
-/*   Updated: 2022/08/07 16:54:43 by plouvel          ###   ########.fr       */
+/*   Updated: 2022/08/08 16:04:04 by bsavinel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,13 +135,13 @@ void	render_img(t_minirt *minirt)
 	//cobj = add_obj_to_scene(&minirt->scene, new_sphere(point(0, 1, 4), 1, 0x00FF00));
 	//apply_obj_texture(cobj, create_checkered_texture(10, 10, 0xFF00FF, 0xFFFF00));
 
-	t_texture texture;
+	/*t_texture texture;
 	create_image_texture(minirt->mlx.ptr, &texture, "textures/moon.xpm");
 	t_texture	skybox;
-	create_image_texture(minirt->mlx.ptr, &skybox, "textures/stars.xpm");
+	create_image_texture(minirt->mlx.ptr, &skybox, "textures/stars.xpm");*/
 
-	apply_normal_map_to_texture(minirt->mlx.ptr, &texture, "textures/moon_nmap.xpm");
-	/*cobj = add_obj_to_scene(&minirt->scene, new_sphere(point(0, 1, 8), 1, 0x00FF00));
+	//apply_normal_map_to_texture(minirt->mlx.ptr, &texture, "textures/moon_nmap.xpm");
+	cobj = add_obj_to_scene(&minirt->scene, new_sphere(point(0, 1, 8), 1, 0x00FF00));
 	cobj = add_obj_to_scene(&minirt->scene, new_sphere(point(2, 3, 8), 1, 0x00FF00));
 	cobj = add_obj_to_scene(&minirt->scene, new_sphere(point(-2, 3, 8), 1, 0x00FF00));
 
@@ -158,7 +158,7 @@ void	render_img(t_minirt *minirt)
 	cobj = add_obj_to_scene(&minirt->scene, new_cylinder(point(-2, 0.0, 8), 0.5, 9, vector(0, 1, 0), 0xff00ff));
 
 	cobj = add_obj_to_scene(&minirt->scene, new_cylinder(point(5.5, 0.0, 8), 0.5, 39, vector(-1, 1, 0), 0xff00ff));
-	cobj = add_obj_to_scene(&minirt->scene, new_cylinder(point(-5.5, 0.0, 8), 0.5, 39, vector(1, 1, 0), 0xff00ff));*/
+	cobj = add_obj_to_scene(&minirt->scene, new_cylinder(point(-5.5, 0.0, 8), 0.5, 39, vector(1, 1, 0), 0xff00ff));
 
 
 	add_light_to_scene(&minirt->scene, point(0,0, 0), 0xFFFFFF, 0.5);
