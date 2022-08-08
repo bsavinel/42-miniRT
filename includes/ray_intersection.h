@@ -6,7 +6,7 @@
 /*   By: bsavinel <bsavinel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/15 17:23:08 by plouvel           #+#    #+#             */
-/*   Updated: 2022/07/30 15:27:30 by plouvel          ###   ########.fr       */
+/*   Updated: 2022/08/08 18:54:38 by bsavinel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,4 +29,5 @@ bool	plane_intersection(t_object *object, t_ray *ray, t_rayhit *rayhit);
 
 bool	intersect_cylinder(t_object *obj, t_ray *ray, t_rayhit *rayhit);
 
+bool	intersect_cone(t_object *obj, t_ray *ray, t_rayhit *rayhit);
 #endif

@@ -6,7 +6,7 @@
 #    By: bsavinel <bsavinel@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/04 13:33:13 by bsavinel          #+#    #+#              #
-#    Updated: 2022/08/08 15:52:07 by bsavinel         ###   ########.fr        #
+#    Updated: 2022/08/08 18:52:47 by bsavinel         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,7 @@
 NAME = miniRT
 
 CC = cc 
-CFLAGS = -g3 -O3 -pthread
+CFLAGS = -Wall -Wextra -g3 -O3 -pthread
 
 
 ARGUMENT_RUN = 
@@ -54,6 +54,7 @@ SRCS =	end/good_exit.c					\
 		plane/intersect_plane.c			\
 		sphere/intersect_sphere.c		\
 		cylinder/intersect_cylinder.c	\
+		cone/intersect_cone.c			\
 		scene/object.c					\
 		scene/scene.c					\
 		scene/camera.c					\
@@ -119,7 +120,7 @@ $(NAME) : $(OBJS) $(LIBS)
 	$(CC) $(CFLAGS) $(OBJS) $(LIBS) -lm -lbsd -lX11 -lXext -o $(NAME) $(INCS)
 	echo "$(BLUE)$(NAME): $(GREEN)Success $(NO_COLOR)"
 
-$(OBJS_PATH)%.o: $(SRCS_PATH)%.c Makefile
+$(OBJS_PATH)%.o: $(SRCS_PATH)%.c
 	mkdir -p $(dir $@)
 	$(CC) $(CFLAGS) -MMD -c $< -o $@ $(INCS)
 

@@ -6,7 +6,7 @@
 /*   By: bsavinel <bsavinel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/13 15:46:37 by plouvel           #+#    #+#             */
-/*   Updated: 2022/08/07 16:54:42 by plouvel          ###   ########.fr       */
+/*   Updated: 2022/08/08 16:32:48 by bsavinel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,8 @@ typedef enum e_object_type
 	T_SPHERE,
 	T_SPHERE_SKYBOX,
 	T_PLAN,
-	T_CYLINDER
+	T_CYLINDER,
+	T_CONE
 }			t_object_type;
 
 typedef enum e_texture_type
@@ -95,6 +96,16 @@ typedef struct s_cylinder
 	double half_height;
 	double diameter;
 }				t_cylinder;
+
+typedef struct s_cone
+{
+	t_point3	top;
+	t_vec3		dir;
+	double		height;
+	double		angle; //* Demi angle du sommet, il doit etre caper a 90 degres non compris et superrieur strict a 0
+	double		len_pente; //* fonction expres
+	double		rayon_base; //* fonction expres
+}				t_cone;
 
 typedef struct s_light
 {
@@ -205,6 +216,7 @@ struct s_object
 	{
 		t_sphere	sphere;
 		t_plan		plan;
+		t_cone		cone;
 		t_cylinder	cylinder;
 	} p;
 	t_matrix4			M;
@@ -216,5 +228,15 @@ struct s_object
 	t_intersect_fnct	fnct;
 	t_uvmap_fnct		uvmap_fnct;
 };
+
+typedef struct s_cone_utils
+{
+	bool		first;
+	bool		second;
+	bool		close_disk;
+	t_rayhit	rayhit_first;
+	t_rayhit	rayhit_second;
+	t_rayhit	rayhit_close_disk;
+}	t_cone_utils;
 
 #endif

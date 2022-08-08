@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   scene.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: plouvel <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: bsavinel <bsavinel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/15 18:47:41 by plouvel           #+#    #+#             */
-/*   Updated: 2022/08/06 19:17:41 by plouvel          ###   ########.fr       */
+/*   Updated: 2022/08/08 18:47:06 by bsavinel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 
 /* object.c */
 
+t_object	*new_cone(t_point3 top, t_vec3 dir, double angle, double height, uint32_t color);
 t_object	*new_sphere(t_point3 center, double radius, uint32_t color);
 t_object	*new_plan(t_point3 point, t_vec3 normal, uint32_t color);
 t_object	*new_cylinder(t_point3 pos, double diameter, double height, t_vec3 orientation,
