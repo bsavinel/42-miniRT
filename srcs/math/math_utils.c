@@ -6,7 +6,7 @@
 /*   By: plouvel <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/16 15:43:25 by plouvel           #+#    #+#             */
-/*   Updated: 2022/08/09 15:31:55 by plouvel          ###   ########.fr       */
+/*   Updated: 2022/08/09 15:37:07 by plouvel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 #include "math_utils.h"
 #include <stdbool.h>
 #include <math.h>
+#include <stdlib.h>
 
 double	min(double a, double b)
 {
@@ -45,6 +46,11 @@ bool	fequals(double a, double b)
 double	sqr(double a)
 {
 	return (a * a);
+}
+
+double	random_double(void)
+{
+	return (rand() / (RAND_MAX + 1.0));
 }
 
 /* Solve a given quadratic equation with the given parameter. */

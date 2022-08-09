@@ -6,7 +6,7 @@
 /*   By: bsavinel <bsavinel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/14 14:52:40 by plouvel           #+#    #+#             */
-/*   Updated: 2022/08/08 16:45:07 by plouvel          ###   ########.fr       */
+/*   Updated: 2022/08/09 15:41:50 by plouvel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,13 @@
 
 static inline uint32_t	get_color(t_color color)
 {
-		unsigned char r, g, b;
+	unsigned char r, g, b;
+	double scale;
 
+	scale = 1. / SAMPLE_PPX;
+	color.x *= scale;
+	color.y *= scale;
+	color.z *= scale;
 	r = min(255., min(1, color.x) * 255.99);
 	g = min(255., min(1, color.y) * 255.99);
 	b = min(255., min(1, color.z) * 255.99);
@@ -43,19 +48,27 @@ void	*render(void *pwrkrs)
 	t_rayhit	rayhit;
 	t_object	*obj;
 	t_point2	rp;
+	t_color		color;
 
 	wrkr = pwrkrs;
 	rp.y = wrkr->assigned_start;
+
 	while (rp.y <= wrkr->assigned_end)
 	{
 		rp.x = 0;
 		while (rp.x < WIDTH)
 		{
-			generate_ray(&wrkr->minirt->camera, &ray, &rayhit, &rp);
-			obj = ray_intersect_scene_objs(&wrkr->minirt->scene, &ray, &rayhit);
-			if (obj)
-				mlx_pixel_img_put(wrkr->minirt, rp.x, rp.y, get_color(
-							get_shade(&wrkr->minirt->scene, obj, &rayhit)));
+			color.x = 0;
+			color.y = 0;
+			color.z = 0;
+			for (size_t i = 0; i < SAMPLE_PPX; i++)
+			{
+				generate_ray(&wrkr->minirt->camera, &ray, &rayhit, &rp);
+				obj = ray_intersect_scene_objs(&wrkr->minirt->scene, &ray, &rayhit);
+				if (obj)
+					color = tadd(color, get_shade(&wrkr->minirt->scene, obj, &rayhit));
+			}
+			mlx_pixel_img_put(wrkr->minirt, rp.x, rp.y, get_color(color));
 			rp.x++;
 		}
 		rp.y++;

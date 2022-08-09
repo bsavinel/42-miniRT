@@ -6,12 +6,13 @@
 /*   By: plouvel <plouvel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/25 12:50:45 by plouvel           #+#    #+#             */
-/*   Updated: 2022/08/09 14:00:44 by plouvel          ###   ########.fr       */
+/*   Updated: 2022/08/09 15:37:56 by plouvel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "matrix.h"
 #include "tuple.h"
+#include "math_utils.h"
 #include <math.h>
 
 /* build_view_matrix build the view matrix with a given origine and a
@@ -50,9 +51,9 @@ void	generate_ray(t_camera *camera, t_ray *ray, t_rayhit *rayhit,
 	double	px;
 	double	py;
 
-	px = (2 * ((rp->x + 0.5) / camera->screen_width) - 1)
+	px = (2 * ((rp->x + random_double()) / camera->screen_width) - 1)
 		* camera->scalar_fov * camera->aspect_ratio;
-	py = (1 - 2 * ((rp->y + 0.5) / camera->screen_height)) * camera->scalar_fov;
+	py = (1 - 2 * ((rp->y + random_double()) / camera->screen_height)) * camera->scalar_fov;
 	ray->org = matrix4_tmul(camera->transform, point(0, 0, 0));
 	ray->dir = vec_norm(matrix4_tmul(camera->transform, vector(px, py, 1)));
 	rayhit->eyev = tnegate(ray->dir);
