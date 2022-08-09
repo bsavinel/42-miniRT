@@ -6,7 +6,7 @@
 /*   By: bsavinel <bsavinel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/14 14:52:40 by plouvel           #+#    #+#             */
-/*   Updated: 2022/08/08 16:04:04 by bsavinel         ###   ########.fr       */
+/*   Updated: 2022/08/09 12:49:47 by bsavinel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -141,7 +141,12 @@ void	render_img(t_minirt *minirt)
 	create_image_texture(minirt->mlx.ptr, &skybox, "textures/stars.xpm");*/
 
 	//apply_normal_map_to_texture(minirt->mlx.ptr, &texture, "textures/moon_nmap.xpm");
-	cobj = add_obj_to_scene(&minirt->scene, new_sphere(point(0, 1, 8), 1, 0x00FF00));
+	add_obj_to_scene(&minirt->scene, new_plan(point(0, -1, 0), vector(0.1, 1, 0), 0xffffff));
+	//cobj = add_obj_to_scene(&minirt->scene, new_sphere(point(0, 1, 8), 1, 0x00FFff));
+	add_obj_to_scene(&minirt->scene, new_cone(point(1, 2, 0), vector(0, 1, 0), 1, 3, 0xFF0000));
+	add_light_to_scene(&minirt->scene, point(0, 2, 2), 0xFFFFFF, 0.2);
+	set_ambiant_light(&minirt->scene, 0xFFFFFF, 0.3);
+	/*cobj = add_obj_to_scene(&minirt->scene, new_sphere(point(0, 1, 8), 1, 0x00FF00));
 	cobj = add_obj_to_scene(&minirt->scene, new_sphere(point(2, 3, 8), 1, 0x00FF00));
 	cobj = add_obj_to_scene(&minirt->scene, new_sphere(point(-2, 3, 8), 1, 0x00FF00));
 
@@ -162,7 +167,7 @@ void	render_img(t_minirt *minirt)
 
 
 	add_light_to_scene(&minirt->scene, point(0,0, 0), 0xFFFFFF, 0.5);
-	set_ambiant_light(&minirt->scene, 0xFFFFFF, 0.3);
+	set_ambiant_light(&minirt->scene, 0xFFFFFF, 0.3);*/
 
 	struct timeval	t, t1;
 	setup_workers(minirt);
