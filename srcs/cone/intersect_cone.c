@@ -6,7 +6,7 @@
 /*   By: bsavinel <bsavinel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/24 17:09:25 by bsavinel          #+#    #+#             */
-/*   Updated: 2022/08/09 11:43:54 by bsavinel         ###   ########.fr       */
+/*   Updated: 2022/08/09 12:43:43 by bsavinel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ bool	give_intersect_cone(t_ray *ray, double distance[2])
 }
 
 bool	intersect_cone_body(t_rayhit *rayhit, t_object *obj,
-							t_ray *ray, t_ray *true_ray)
+							t_ray *ray, t_ray *world_ray)
 {
 	double		distance[2];
 
@@ -45,7 +45,7 @@ bool	intersect_cone_body(t_rayhit *rayhit, t_object *obj,
 		if (distance[0] >= 0 && rayhit->intersect_p_local.y < 0
 			&& rayhit->intersect_p_local.y > -obj->p.cone.height)
 		{
-			feed_rayhit(rayhit, obj, true_ray, distance[0]);
+			feed_rayhit(rayhit, obj, world_ray, distance[0]);
 			return (true);
 		}
 		else if (distance[1] >= 0)
@@ -54,7 +54,7 @@ bool	intersect_cone_body(t_rayhit *rayhit, t_object *obj,
 			if (rayhit->intersect_p_local.y < 0
 				&& rayhit->intersect_p_local.y > -obj->p.cone.height)
 			{
-				feed_rayhit(rayhit, obj, true_ray, distance[1]);
+				feed_rayhit(rayhit, obj, world_ray, distance[1]);
 				return (true);
 			}
 		}
@@ -62,7 +62,7 @@ bool	intersect_cone_body(t_rayhit *rayhit, t_object *obj,
 	return (false);
 }
 
-bool	base_cone(t_rayhit *rayhit, t_object *obj, t_ray *ray, t_ray *true_ray)
+bool	base_cone(t_rayhit *rayhit, t_object *obj, t_ray *ray, t_ray *world_ray)
 {
 	double	t;
 	double	x;
@@ -71,11 +71,11 @@ bool	base_cone(t_rayhit *rayhit, t_object *obj, t_ray *ray, t_ray *true_ray)
 	t = (-obj->p.cone.height - ray->org.y) / ray->dir.y;
 	x = ray->org.x + ray->dir.x * t;
 	z = ray->org.z + ray->dir.z * t;
-	if (t > 0 && x * x + z * z <= 1)
+	if (t > 0 && x * x + z * z <= obj->p.cone.height)
 	{
 		rayhit->t = t;
-		rayhit->normal = vector(0, -1, 0);
-		rayhit->intersect_p = get_ray_point(*true_ray, t);
+		rayhit->normal = vec_norm(matrix4_tmul(obj->M_inv_trans,vector(0, -1, 0)));
+		rayhit->intersect_p = get_ray_point(*world_ray, t);
 		return (true);
 	}
 	return (false);
@@ -91,8 +91,7 @@ bool	first_inter_cone(t_cone_utils *utils, t_rayhit *rayhit)
 		retour = true;
 		*rayhit = utils->rayhit_body;
 	}
-	if (utils->base && (retour == false
-			|| rayhit->t > utils->rayhit_base.t))
+	if (utils->base && (retour == false || utils->rayhit_body.t > utils->rayhit_base.t))
 	{
 		retour = true;
 		*rayhit = utils->rayhit_base;
