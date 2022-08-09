@@ -6,7 +6,7 @@
 /*   By: bsavinel <bsavinel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/15 18:43:00 by plouvel           #+#    #+#             */
-/*   Updated: 2022/08/08 18:55:29 by bsavinel         ###   ########.fr       */
+/*   Updated: 2022/08/09 09:33:05 by bsavinel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,17 +109,6 @@ t_object	*new_plan(t_point3 pos, t_vec3 normal, uint32_t color)
 	return (obj);
 }
 
-//TODO regarder si encore util
-
-void	len_and_rayon_cone(t_object *obj)
-{
-	double	radian_angle;
-
-	radian_angle = (obj->p.cone.angle * M_PI) / 180;
-	obj->p.cone.len_pente = obj->p.cone.height / cos(radian_angle);
-	obj->p.cone.rayon_base = obj->p.cone.height * tan(radian_angle);
-}
-
 t_object	*new_cone(t_point3 top, t_vec3 dir, double angle, double height, uint32_t color)
 {
 	t_object	*obj;
@@ -133,7 +122,6 @@ t_object	*new_cone(t_point3 top, t_vec3 dir, double angle, double height, uint32
 	obj->p.cone.height = height;
 	obj->fnct = &intersect_cone;
 	obj->type = T_CONE;
-	len_and_rayon_cone(obj);
 	obj->albedo = get_norm_color(color);
 	obj->M = build_rotation_matrix(vec_norm(dir));
 	obj->M = matrix4_mul(matrix4_scale(height, height, height), obj->M);
