@@ -6,7 +6,7 @@
 /*   By: bsavinel <bsavinel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/13 15:46:37 by plouvel           #+#    #+#             */
-/*   Updated: 2022/08/09 10:58:21 by bsavinel         ###   ########.fr       */
+/*   Updated: 2022/08/09 11:03:39 by bsavinel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -229,12 +229,10 @@ struct s_object
 
 typedef struct s_cone_utils
 {
-	bool		first;
-	bool		second;
-	bool		close_disk;
-	t_rayhit	rayhit_first;
-	t_rayhit	rayhit_second;
-	t_rayhit	rayhit_close_disk;
+	bool		body;
+	bool		base;
+	t_rayhit	rayhit_body;
+	t_rayhit	rayhit_base;
 }	t_cone_utils;
 
 #endif
